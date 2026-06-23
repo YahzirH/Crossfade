@@ -4,7 +4,7 @@ Crossfade is a platform built to make it easier for friends to connect through m
 
 ---
 
-Why this exists
+# Why this exists
 
 This project started because my friend and I ran into the problem that we both use different music streaming platforms, but we still want to share music and listen together easily.
 
