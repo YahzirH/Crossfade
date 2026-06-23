@@ -13,4 +13,4 @@ RUN uv sync --frozen
 
 COPY . .
 
-CMD ["uv", "run", "uvicorn", "src.music_sync.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uv", "run", "uvicorn", "src.music_sync.backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
