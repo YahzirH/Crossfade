@@ -1,5 +1,6 @@
 FROM python:3.12-slim
 
+# Set environment variables to prevent Python from writing .pyc files and to ensure output is sent straight to the terminal without buffering
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
@@ -13,4 +14,5 @@ RUN uv sync --frozen
 
 COPY . .
 
-CMD ["uv", "run", "uvicorn", "src.music_sync.backend.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Run the application with uvicorn
+CMD ["uv", "run", "uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
