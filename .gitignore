@@ -1,4 +1,5 @@
 # Messed up original gitignore. This is a combination of the official Python.gitignore and some additional ignores for common tools and environments.
+.history/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
