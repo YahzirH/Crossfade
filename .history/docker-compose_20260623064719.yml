@@ -1,8 +1,0 @@
-services:
-  backend:
-    build: .
-    ports:
-      - "8000:8000"
-# Mount the current directory to /app in the container with SELinux context set to Z
-    volumes:
-      - .:/app:Z
