@@ -1,13 +1,10 @@
-import os
 import httpx
-from dotenv import load_dotenv
+from app.core.config import settings
 from fastapi import Depends, HTTPException
 from backend.app.lifespan import get_global_http_client
 
-# Load environment variables from .env file
-load_dotenv()
-# Get the Last.fm API key from environment variables
-LASTFM_API_KEY = os.getenv("LASTFM_API_KEY")
+# Load the Last.fm API key from the environment variables
+LASTFM_API_KEY = settings.lastfm_api_key
 
 class LastFMService:
     def __init__(self, http_client: httpx.AsyncClient = Depends(get_global_http_client)):
