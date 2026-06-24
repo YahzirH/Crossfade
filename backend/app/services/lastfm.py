@@ -2,7 +2,7 @@ import os
 import httpx
 from dotenv import load_dotenv
 from fastapi import Depends, HTTPException
-from lifespan import get_global_http_client
+from backend.app.lifespan import get_global_http_client
 
 # Load environment variables from .env file
 load_dotenv()
