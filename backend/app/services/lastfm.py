@@ -1,6 +1,6 @@
 import httpx
-from app.core.config import settings
 from fastapi import Depends, HTTPException
+from backend.app.core.config import settings
 from backend.app.lifespan import get_global_http_client
 
 # Load the Last.fm API key from the environment variables
