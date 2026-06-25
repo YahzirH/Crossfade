@@ -8,6 +8,5 @@ router = APIRouter(prefix="/compare", tags=["compare"])
 async def compare(
     user1: str,
     user2: str,
-    service: ComparisonService = Depends(get_comparison_service)
-):
-    return await service.compare_users(user1, user2)
+    service: ComparisonService = Depends(get_comparison_service)):
+        return await service.compare_users(user1, user2)
