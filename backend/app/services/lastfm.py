@@ -1,10 +1,15 @@
 import httpx
+import logging
 from fastapi import Depends, HTTPException
 from backend.app.core.config import settings
 from backend.app.lifespan import get_global_http_client
 
+# Set up a logger for this module
+logger = logging.getLogger(f"crossfade.{__name__}")
+
 # Load the Last.fm API key from the environment variables
 LASTFM_API_KEY = settings.lastfm_api_key
+
 
 class LastFMService:
     def __init__(self, http_client: httpx.AsyncClient = Depends(get_global_http_client)):
@@ -25,22 +30,27 @@ class LastFMService:
                 }
             )
             response.raise_for_status()
+            logger.info(f"Last.fm API key found")
             return response.json()
         except httpx.HTTPError as e:
+            logger.error(f"HTTP error occurred for method {method}: {e}")
             raise HTTPException(
                 status_code=e.response.status_code, 
                 detail=f"Error fetching data from Last.fm method {method}"
             )
         except httpx.RequestError:
+            logger.error("Last.fm API is currently unreachable")
             raise HTTPException(
                 status_code=503, 
                 detail="Last.fm API is currently unreachable"
             )
         
     async def get_user_info(self, username: str):
+        logger.info(f"Fetching user info for {username}")
         return await self._request("user.getInfo", user=username)
     
     async def get_top_artists(self, username: str, limit: int = 50):
+        logger.info(f"Fetching top artists for {username}")
         data = await self._request("user.getTopArtists", user=username, limit=limit)
         return [
             artist["name"] 
@@ -48,6 +58,7 @@ class LastFMService:
         ]
     
     async def get_top_tracks(self, username: str, limit: int = 50):
+        logger.info(f"Fetching top tracks for {username}")
         data = await self._request("user.getTopTracks", user=username, limit=limit)
         return [
             track["name"] 
