@@ -1,7 +1,11 @@
 from fastapi import FastAPI 
 from .lifespan import lifespan
+from backend.app.core.logs import setup_logging
 from backend.app.routers.lastfm import router as lastfm_router
 from backend.app.routers.comparison import router as comparison_router
+
+# Initialize logging
+setup_logging()
 
 app = FastAPI(lifespan=lifespan)
 
